@@ -1384,7 +1384,9 @@ public class FileSinkOperator extends TerminalOperator<FileSinkDesc> implements
           throw new HiveFatalException(
                ErrorMsg.DYNAMIC_PARTITIONS_TOO_MANY_PER_NODE_ERROR.getErrorCodedMsg()
                + "Maximum was set to " + maxPartitions + " partitions per node"
-               + ", number of dynamic partitions on this node: " + valToPaths.size());
+               + ", number of dynamic partitions on this node: " + valToPaths.size()
+               + ". If config change did not help, try splitting the insert query into"
+               + " multiple insert queries based on values of partition");
         }
 
         if (!conf.getDpSortState().equals(DPSortState.NONE) && prevFsp != null) {
